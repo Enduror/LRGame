@@ -23,16 +23,16 @@ public class PlayerMovementControll : MonoBehaviour
 
         controller.Move(direction * movementSpeed * Time.deltaTime);
 
-        if (Input.GetKey(KeyCode.J))
+        if (Input.GetKey(KeyCode.H))
             transform.Rotate(Vector3.forward * rotateSpeed * Time.deltaTime);
 
-        if (Input.GetKey(KeyCode.L))
+        if (Input.GetKey(KeyCode.K))
             transform.Rotate(-Vector3.forward* rotateSpeed * Time.deltaTime);
 
-        if (Input.GetKey(KeyCode.I))
+        if (Input.GetKey(KeyCode.U))
             transform.Rotate(Vector3.right * rotateSpeed * Time.deltaTime);
 
-        if (Input.GetKey(KeyCode.K))
+        if (Input.GetKey(KeyCode.J))
             transform.Rotate(-Vector3.right * rotateSpeed * Time.deltaTime);
                
         transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, 0, transform.rotation.eulerAngles.z);
