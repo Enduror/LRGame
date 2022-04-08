@@ -6,6 +6,7 @@ public class CameraControl : MonoBehaviour
 {
     Vector3 offset;
     public GameObject ball;
+    Rigidbody rbBall;
     float xOffset;
     float zOffset;
     float yOffset;
@@ -16,6 +17,7 @@ public class CameraControl : MonoBehaviour
     void Start()
     {
         offset = transform.position - ball.transform.position;
+        rbBall = ball.GetComponent<Rigidbody>();
 
     }
 
@@ -23,7 +25,9 @@ public class CameraControl : MonoBehaviour
     void Update()
     {
         // transform.position= ball.transform.position + offset;
-        xOffset = ball.transform.position.x/3;
+
+        xOffset = ball.transform.position.x / 3;
+
         if (ball.transform.position.y > 3f)
         {
             yOffset = ball.transform.position.y / 12;

@@ -17,6 +17,7 @@ public class SwipeSet : MonoBehaviour
     int TapCount;
     float slowMoStartY = 6.5f;
     float setPositionY = 2.5f;
+    CatchBall CatchBall;
 
     // Start is called before the first frame update
     void Start()
@@ -24,7 +25,8 @@ public class SwipeSet : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         TapCount = 0;
         screenSize = new Vector2(Screen.width, Screen.height);
-        GameObject.FindWithTag("Ball").GetComponent<CatchBall>().enabled = false;
+        CatchBall = GetComponent<CatchBall>();
+        CatchBall.enabled = false;
     }
 
     // Update is called once per frame
@@ -59,13 +61,10 @@ public class SwipeSet : MonoBehaviour
                             hitBall = true;
                         }
                     }
-
-                    Debug.Log("Touch : Begun");
                     break;
 
                 //Determine if the touch is a moving touch
                 case TouchPhase.Moved:
-                    Debug.Log("Touch : Moving");
                     break;
 
                 case TouchPhase.Ended:
@@ -74,15 +73,14 @@ public class SwipeSet : MonoBehaviour
                     {
                         // Determine direction by comparing the end touch position with the initial one
                         swipeInput = touch.position - startPos;
-                        forceInput = new Vector2(swipeInput.x / screenSize.x, swipeInput.y / screenSize.y) * 1500;
+                        forceInput = new Vector2(swipeInput.x / screenSize.x, swipeInput.y / screenSize.y) * 500;
                         // Report that the touch has ended when it ends
-                        Debug.Log("Touch : End");
                         Time.timeScale = 1;
                         Time.fixedDeltaTime = 0.02F * Time.timeScale;
                         //ApplyForce();
                         rb.AddForce(forceInput);
                         inputAllowed = false;
-                        GameObject.FindWithTag("Ball").GetComponent<CatchBall>().enabled = true;
+                        CatchBall.enabled = true;
                         GameObject.Find("Main Camera").GetComponent<CameraControl>().enabled = true;
                     }
                     else
@@ -112,11 +110,10 @@ public class SwipeSet : MonoBehaviour
         Time.fixedDeltaTime = 0.02F * Time.timeScale;
         hitBall = false;
         inputAllowed = true;
-        GameObject.FindWithTag("Ball").GetComponent<CatchBall>().enabled = false;
-        GameObject.FindWithTag("Ball").GetComponent<CatchBall>().spikable = false;
+        CatchBall.enabled = false;
+        CatchBall.spikable = false;
         GameObject.Find("Main Camera").GetComponent<Transform>().position = new Vector3(1f, 4f, -4f);
         GameObject.Find("Main Camera").GetComponent<Transform>().rotation = Quaternion.identity;
         GameObject.Find("Main Camera").GetComponent<CameraControl>().enabled = false;
-
     }
 }
