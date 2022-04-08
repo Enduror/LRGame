@@ -125,7 +125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a0fecf9604201e41b7624e71ebe73af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  receiveVectors: []
-  receiveVector6: {x: 1, y: 10, z: 2}
-  receiveForce: 600
+  receiveForce: 700
+  receiveHeight: 50
+  receiveDirection: {x: 0, y: 0, z: 0}
   marker: {fileID: 1393531863240984346, guid: d76dc065a73615d418bd91664506551d, type: 3}
