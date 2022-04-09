@@ -5,14 +5,22 @@ using UnityEngine;
 public class ResetBall : MonoBehaviour
 {
     Rigidbody rb;
+    SwipeSet SwipeSet;
+    CatchBall CatchBall;
+    public ResetCamera ResetCamera;
     public int TapCount;
-    bool hitBall = false;
+    bool ballTap;
+    //raycast handling
     RaycastHit hit;
 
     // Start is called before the first frame update
     void Start()
     {
+        SwipeSet = GameObject.FindWithTag("Ball").GetComponent<SwipeSet>();
+        CatchBall = GameObject.FindWithTag("Ball").GetComponent<CatchBall>();
+        //ResetCamera = GameObject.FindWithTag("Main Camera").GetComponent<ResetCamera>();
         rb = GetComponent<Rigidbody>();
+        ballTap = false;
         TapCount = 0;
     }
 
@@ -36,26 +44,45 @@ public class ResetBall : MonoBehaviour
                     {
                         if (hit.transform.tag == "Ball")
                         {
-                            hitBall = true;
+                            ballTap = true;
                         }
                     }
                     break;
 
                 case TouchPhase.Ended:
-                    if (hitBall == false)
+                    if (ballTap)
+                    {
+                        ballTap = false;
+                    }
+                    else
                     {
                         TapCount++;
                     }
-                    if (TapCount == 2)
+                    if (TapCount > 1)
                     {
-                        rb.velocity = Vector3.zero;
-                        rb.angularVelocity = Vector3.zero;
-                        rb.position = new Vector3(0f, 7f, -0.5f);
-                        Time.timeScale = 1;
-                        Time.fixedDeltaTime = 0.02F * Time.timeScale;
+                        // list reset methodes here
+                        BallToBeforeSet();
+                        ResetSlowMo();
+                        ResetCamera.RestCameraPosition();
+                        TapCount = 0;
                     }
                     break;
             }
         }
+    }
+    void BallToBeforeSet()
+    {
+        transform.position = new Vector3(1f, 7f, -0.5f);
+        rb.velocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
+        SwipeSet.secondTouch = false;
+        SwipeSet.secondTouchAllowed = true;
+        CatchBall.enabled = false;
+        CatchBall.spikable = false;
+    }
+    void ResetSlowMo()
+    {
+        Time.timeScale = 1;
+        Time.fixedDeltaTime = 0.02F * Time.timeScale;
     }
 }

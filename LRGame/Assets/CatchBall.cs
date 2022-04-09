@@ -5,7 +5,7 @@ using UnityEngine;
 public class CatchBall : MonoBehaviour
 {
     Rigidbody rb;
-    float playerHitAltitude = 3f;
+    public float playerHitAltitude = 3f;
     float slowMoStartY = 4f;
     public bool spikable = false;
 
