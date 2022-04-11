@@ -7,8 +7,9 @@ public class ResetBall : MonoBehaviour
     Rigidbody rb;
     SwipeSet SwipeSet;
     CatchBall CatchBall;
+    Spike Spike;
     public ResetCamera ResetCamera;
-    public int TapCount;
+    int TapCount;
     bool ballTap;
     //raycast handling
     RaycastHit hit;
@@ -18,7 +19,7 @@ public class ResetBall : MonoBehaviour
     {
         SwipeSet = GameObject.FindWithTag("Ball").GetComponent<SwipeSet>();
         CatchBall = GameObject.FindWithTag("Ball").GetComponent<CatchBall>();
-        //ResetCamera = GameObject.FindWithTag("Main Camera").GetComponent<ResetCamera>();
+        Spike = GameObject.FindWithTag("Ball").GetComponent<Spike>();
         rb = GetComponent<Rigidbody>();
         ballTap = false;
         TapCount = 0;
@@ -79,6 +80,8 @@ public class ResetBall : MonoBehaviour
         SwipeSet.secondTouchAllowed = true;
         CatchBall.enabled = false;
         CatchBall.spikable = false;
+        Spike.thirdTouch = false;
+        Spike.thirdTouchAllowed = true;
     }
     void ResetSlowMo()
     {

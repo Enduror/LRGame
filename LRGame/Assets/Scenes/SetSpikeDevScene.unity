@@ -458,7 +458,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 997b70cfad5cd7843970396dc03bf371, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerHitAltitude: 3
   spikable: 0
 --- !u!114 &707318796
 MonoBehaviour:
@@ -886,10 +885,6 @@ PrefabInstance:
     - target: {fileID: 4266845213257416159, guid: 26c66ed694f10494abf74215c0f3f257, type: 3}
       propertyPath: m_UseGravity
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4266845213257416159, guid: 26c66ed694f10494abf74215c0f3f257, type: 3}
-      propertyPath: m_Constraints
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5959348017657388165, guid: 26c66ed694f10494abf74215c0f3f257, type: 3}

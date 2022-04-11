@@ -5,6 +5,7 @@ using UnityEngine;
 public class SwipeSet : MonoBehaviour
 {
     CatchBall CatchBall;
+    Spike Spike;
     Rigidbody rb;
 
     Vector2 screenSize;
@@ -28,6 +29,8 @@ public class SwipeSet : MonoBehaviour
         screenSize = new Vector2(Screen.width, Screen.height);
         CatchBall = GameObject.FindWithTag("Ball").GetComponent<CatchBall>();
         CatchBall.enabled = false;
+        Spike = GameObject.FindWithTag("Ball").GetComponent<Spike>();
+        Spike.enabled = false;
     }
 
     // Update is called once per frame
@@ -90,6 +93,7 @@ public class SwipeSet : MonoBehaviour
                         // configure state of values
                         secondTouchAllowed = false;
                         CatchBall.enabled = true;
+                        Spike.enabled = true;
                     }
                     break;
             }

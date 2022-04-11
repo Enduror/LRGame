@@ -11,7 +11,7 @@ public class CameraControl : MonoBehaviour
     float yOffset;
     float BallpeakAltitude;
     SwipeSet SwipeSet;
-    CatchBall CatchBall;
+    Spike Spike;
     Vector3 CameraInitialPosition;
 
     // Start is called before the first frame update
@@ -19,7 +19,7 @@ public class CameraControl : MonoBehaviour
     {
         rbBall = ball.GetComponent<Rigidbody>();
         SwipeSet = GameObject.FindWithTag("Ball").GetComponent<SwipeSet>();
-        CatchBall = GameObject.FindWithTag("Ball").GetComponent<CatchBall>();
+        Spike = GameObject.FindWithTag("Ball").GetComponent<Spike>();
         CameraInitialPosition = transform.position;
         BallpeakAltitude = 6f;
     }
@@ -27,33 +27,37 @@ public class CameraControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // after relese of touch input and foce is applied
-        if (SwipeSet.secondTouchAllowed == false)
+        // SET: after relese of touch input and foce is applied
+        if (SwipeSet.secondTouchAllowed == false && Spike.thirdTouchAllowed)
         {
             // camera movement
-            xOffset = ball.transform.position.x / 3;
-            if (ball.transform.position.y > CameraInitialPosition.y)
+            // ball above player's hit hight
+            if (ball.transform.position.y > Spike.playerHitHight)
             {
-                yOffset = (ball.transform.position.y - CameraInitialPosition.y) / 2;
-                if (rbBall.velocity.y > 0)
+                xOffset = ball.transform.position.x / 3;
+                if (ball.transform.position.y > CameraInitialPosition.y)
                 {
-                    zOffset = -(ball.transform.position.y - CameraInitialPosition.y);
-                }
-                if (rbBall.velocity.y == 0)
-                {
-                    BallpeakAltitude = ball.transform.position.y;
-                }
-                if (rbBall.velocity.y < 0)
-                {
-                    //zOffset = -(ball.transform.position.y - CameraInitialPosition.y) - rbBall.velocity.y * CatchBall.playerHitAltitude / BallpeakAltitude / 6;
-                    zOffset = -(ball.transform.position.y - CameraInitialPosition.y) - rbBall.velocity.y / (BallpeakAltitude - CatchBall.playerHitAltitude);
-                    if (zOffset > 1f)
+                    yOffset = (ball.transform.position.y - CameraInitialPosition.y) / 2;
+                    if (rbBall.velocity.y > 0)
                     {
-                        zOffset = 1f;
+                        zOffset = -(ball.transform.position.y - CameraInitialPosition.y);
+                    }
+                    if (rbBall.velocity.y == 0)
+                    {
+                        BallpeakAltitude = ball.transform.position.y;
+                    }
+                    if (rbBall.velocity.y < 0)
+                    {
+                        //zOffset = -(ball.transform.position.y - CameraInitialPosition.y) - rbBall.velocity.y * CatchBall.playerHitAltitude / BallpeakAltitude / 6;
+                        zOffset = -(ball.transform.position.y - CameraInitialPosition.y) - rbBall.velocity.y / (BallpeakAltitude - Spike.playerHitHight);
+                        if (zOffset > 1f)
+                        {
+                            zOffset = 1f;
+                        }
                     }
                 }
+                transform.position = new Vector3(ball.transform.position.x, CameraInitialPosition.y, CameraInitialPosition.z) + new Vector3(xOffset, yOffset, zOffset);
             }
-            transform.position = new Vector3(ball.transform.position.x, CameraInitialPosition.y, CameraInitialPosition.z) + new Vector3(xOffset, yOffset, zOffset);
 
             // camera pointing
             //ball rises
@@ -76,6 +80,16 @@ public class CameraControl : MonoBehaviour
         else
         {
             transform.rotation = Quaternion.identity;
+        }
+
+        // SPIKE: after relese of touch input and foce is applied
+        if (Spike.thirdTouchAllowed == false)
+        {
+            // camera movement
+
+            // camera pointing
+            transform.LookAt(ball.transform.position + new Vector3(0f, -1f, 0f));
+
         }
     }
 }
