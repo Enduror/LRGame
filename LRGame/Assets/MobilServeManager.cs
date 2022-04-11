@@ -4,58 +4,43 @@ using UnityEngine;
 
 public class MobilServeManager : MonoBehaviour
 {
+    public GameObject ball;   
+    public Vector3 ServePosition;    
+    public float ServeStrength;        
 
-    public GameObject ball;
-    public Vector3 ServePosition;
-    public float ServeStrength;
-    public float XServeVariation;
-    public float YServeVariation;
-    public float ZServeVariation;
-    public float ServeHeight;
-    public CameraAttachedToPlayer cam;
+    public Vector3[] ServeDirection;
+    public Vector3 ServeDirection5;
+    public Vector3 Randomization;
+    public float RandomizedServeStrength;
 
-    public GameObject[] Receiver;
-
-    public Vector3 serveDirection;
-    public Vector3 RandomizedDirection;
-    public float StrengthVariation;
-
-    public float timer;
-
+    
     public float timeToServe;
     // Start is called before the first frame update
     void Start()
-    {
-        StartCoroutine(ServeBall());
+    {        
+        StartCoroutine(ServeBall(ServePosition));
     }
 
-
-
-    IEnumerator ServeBall()
+    IEnumerator ServeBall(Vector3 ServePosition)
     {
+        
+        
         while (true)
         {
-            
-            cam.ResetCam();
-
-            var currentReceiver = Receiver[Random.Range(0, Receiver.Length)];
-            currentReceiver.GetComponent<MobilePlayerController>().enabled = true;
-            cam.AttachToReceiver(currentReceiver);
-            serveDirection = currentReceiver.transform.position - transform.position;
-            serveDirection = new Vector3(serveDirection.x + Random.Range(-XServeVariation, XServeVariation), serveDirection.y + ServeHeight + Random.Range(-YServeVariation, YServeVariation), serveDirection.z + Random.Range(-ZServeVariation, ZServeVariation));
+            Randomization = new Vector3(
+                ServeDirection5.x + Random.Range(-1f, 1f),
+                ServeDirection5.y + Random.Range(-1f, 1f),
+                ServeDirection5.z + Random.Range(-1f, 1f));
+            RandomizedServeStrength = ServeStrength + Random.Range(-50, 50);
 
 
-
-            float finalStrength = ServeStrength + Random.Range(0, StrengthVariation);
-
-
-            GameObject go = Instantiate(ball, transform.position, Quaternion.identity);
+            GameObject go = Instantiate(ball, ServePosition, Quaternion.identity);
             go.GetComponent<Rigidbody>().useGravity = true;
             go.GetComponent<Rigidbody>().AddForce(
-              serveDirection.normalized * finalStrength);
+                Randomization.normalized  * RandomizedServeStrength);
             Destroy(go, 10);
+            
             yield return new WaitForSeconds(timeToServe);
-            currentReceiver.GetComponent<MobilePlayerController>().enabled = false;
         }
     }
 
