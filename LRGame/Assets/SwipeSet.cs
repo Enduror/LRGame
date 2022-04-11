@@ -5,7 +5,6 @@ using UnityEngine;
 public class SwipeSet : MonoBehaviour
 {
     CatchBall CatchBall;
-    CameraControl CameraControl;
     Rigidbody rb;
 
     Vector2 screenSize;
@@ -18,6 +17,7 @@ public class SwipeSet : MonoBehaviour
 
     RaycastHit hit;
 
+    float slowMoFct;
     float slowMoStartY = 6.5f;
     float setPositionY = 2.5f;
 
@@ -28,7 +28,6 @@ public class SwipeSet : MonoBehaviour
         screenSize = new Vector2(Screen.width, Screen.height);
         CatchBall = GameObject.FindWithTag("Ball").GetComponent<CatchBall>();
         CatchBall.enabled = false;
-        CameraControl = GameObject.FindWithTag("MainCamera").GetComponent<CameraControl>();
     }
 
     // Update is called once per frame
@@ -36,10 +35,16 @@ public class SwipeSet : MonoBehaviour
     {
         //slow falling ball before set
         if (secondTouchAllowed && rb.position.y < slowMoStartY && Time.timeScale > 0.01f)
-            // Time.timeScale = 1f - Mathf.Sqrt((rb.position.y - setPositionY)/(slowMoStartY - setPositionY));
-            Time.timeScale = 1f - 1 / (2 * (rb.position.y - setPositionY));
+        {
+            // slowMoFct = 1f - Mathf.Sqrt((rb.position.y - setPositionY)/(slowMoStartY - setPositionY));
+            slowMoFct = 1f - 1 / (2 * (rb.position.y - setPositionY));
+            if (slowMoFct < 0.01f)
+            {
+                slowMoFct = 0.01f;
+            }
+            Time.timeScale = slowMoFct;
             Time.fixedDeltaTime = 0.02F * Time.timeScale;
-
+        }
 
         // Track a single touch as a direction control.
         if (Input.touchCount > 0)
