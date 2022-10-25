@@ -298,7 +298,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 280677648}
   m_LocalRotation: {x: 0.08715578, y: 0, z: 0, w: 0.9961947}
-  m_LocalPosition: {x: 0, y: 1.2, z: -7.5}
+  m_LocalPosition: {x: 0, y: 1.7, z: -7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -325,12 +325,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 280677648}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 53200e6a7f5455843979dd3b4e582989, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
+  target: {fileID: 929051133}
 --- !u!1 &346440833
 GameObject:
   m_ObjectHideFlags: 0
@@ -475,7 +475,7 @@ GameObject:
   - component: {fileID: 598652573}
   - component: {fileID: 598652572}
   m_Layer: 0
-  m_Name: MobileLeftArm
+  m_Name: ArmSurface
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -564,66 +564,38 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 598652571}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: -6.5}
+  m_LocalPosition: {x: 0, y: 1.2, z: -6.5}
   m_LocalScale: {x: 0.5, y: 0.1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &605388832
+--- !u!1 &929051127 stripped
 GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 4122616739295182787, guid: 26c66ed694f10494abf74215c0f3f257, type: 3}
+  m_PrefabInstance: {fileID: 1094591658}
   m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 605388834}
-  - component: {fileID: 605388833}
-  m_Layer: 0
-  m_Name: ServeManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &605388833
+--- !u!4 &929051133 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3093159462517194135, guid: 26c66ed694f10494abf74215c0f3f257, type: 3}
+  m_PrefabInstance: {fileID: 1094591658}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &929051134
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 605388832}
+  m_GameObject: {fileID: 929051127}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59a30ceefa224f2419ba979120a14892, type: 3}
+  m_Script: {fileID: 11500000, guid: de9fed34b8d6ba94a97e27e80a0caac6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ball: {fileID: 8687952404311796368, guid: 29bc83c558efd6045b268fcac0bdf2f2, type: 3}
+  timeToServe: 3
   ServePosition: {x: 0, y: 3, z: 10}
-  ServeStrength: 615
-  ServeDirection:
-  - {x: -1.7, y: 6, z: -10}
-  - {x: 0, y: 6, z: -10}
-  - {x: 1.7, y: 6, z: -10}
-  ServeDirection5: {x: 0, y: 5, z: -9}
-  Randomization: {x: 0, y: 0, z: 0}
-  RandomizedServeStrength: 0
-  timeToServe: 2
---- !u!4 &605388834
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 605388832}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  ServeStrength: 1200
+  ServeDirection: {x: 0, y: 1, z: -6}
 --- !u!1 &1068160091
 GameObject:
   m_ObjectHideFlags: 0
@@ -761,7 +733,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3093159462517194135, guid: 26c66ed694f10494abf74215c0f3f257, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3093159462517194135, guid: 26c66ed694f10494abf74215c0f3f257, type: 3}
       propertyPath: m_LocalPosition.x
@@ -806,6 +778,14 @@ PrefabInstance:
     - target: {fileID: 4122616739295182787, guid: 26c66ed694f10494abf74215c0f3f257, type: 3}
       propertyPath: m_Name
       value: BallWithTexture
+      objectReference: {fileID: 0}
+    - target: {fileID: 4122616739295182787, guid: 26c66ed694f10494abf74215c0f3f257, type: 3}
+      propertyPath: m_TagString
+      value: Ball
+      objectReference: {fileID: 0}
+    - target: {fileID: 4266845213257416159, guid: 26c66ed694f10494abf74215c0f3f257, type: 3}
+      propertyPath: m_Constraints
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 26c66ed694f10494abf74215c0f3f257, type: 3}

@@ -12,6 +12,9 @@ public class ServeManager : MonoBehaviour
     public float ServeStrength;
     public Vector3 ServeDirection;
     private Vector3 Randomization;
+    private Vector3 startReceivePosition;
+    private Quaternion startReceiveRotation;
+
 
     // Start is called before the first frame update
     void Start()
@@ -19,6 +22,9 @@ public class ServeManager : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         servePosition = transform.position;
         timeRemaining = timeToServe;
+
+        startReceivePosition = GameObject.FindWithTag("Player").GetComponent<Transform>().position;
+        startReceiveRotation = GameObject.FindWithTag("Player").GetComponent<Transform>().rotation;
         serveBall();
     }
 
@@ -30,10 +36,17 @@ public class ServeManager : MonoBehaviour
             timeRemaining -= Time.deltaTime;
         } else 
         {
+            resetPlayer();
             resetBall();
             serveBall();
             timeRemaining = timeToServe;
         }
+    }
+
+    void resetPlayer()
+    {
+        GameObject.FindWithTag("Player").GetComponent<Transform>().position = startReceivePosition;
+        GameObject.FindWithTag("Player").GetComponent<Transform>().rotation = startReceiveRotation;
     }
 
     void resetBall()
