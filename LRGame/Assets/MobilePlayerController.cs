@@ -44,9 +44,10 @@ public class MobilePlayerController : MonoBehaviour
                 adjustedVector.y = touchSpaceY; // y=[0,touchSpaceY]
             }
             transform.position = startPosition + new Vector3(adjustedVector.x, 0, adjustedVector.y) * movementRange;
-            CameraFollow.offset = startCameraOffset + new Vector3(0f, touchSpaceY - adjustedVector.y, -adjustedVector.y);
+            CameraFollow.offset = startCameraOffset + new Vector3(-2*adjustedVector.x, touchSpaceY - adjustedVector.y, -adjustedVector.y);
 
-            xRotation = (0.5f - adjustedVector.y/10) * 45;
+            xRotation = (1 - adjustedVector.y/2 - Mathf.Abs(adjustedVector.x)) * 45;
+            // xRotation = (0.5f - adjustedVector.y / 10) * 45;
             yRotation = adjustedVector.x * 180;
             zRotation = adjustedVector.x * 180; 
             transform.rotation = Quaternion.Euler(xRotation, yRotation, zRotation);
