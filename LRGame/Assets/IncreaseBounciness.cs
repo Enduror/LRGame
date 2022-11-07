@@ -6,6 +6,6 @@ public class IncreaseBounciness : MonoBehaviour
 {
     private void OnCollisionExit(Collision collision)
     {
-        GetComponent<Rigidbody>().velocity *= 3f;
+        GetComponent<Rigidbody>().velocity *= 1.2f;
     }
 }
