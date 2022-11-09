@@ -15,7 +15,6 @@ public class ServeManager : MonoBehaviour
     private Vector3 startReceivePosition;
     private Quaternion startReceiveRotation;
 
-
     // Start is called before the first frame update
     void Start()
     {
@@ -58,10 +57,20 @@ public class ServeManager : MonoBehaviour
 
     void serveBall() 
     {
+        rb.AddTorque(Random.Range(-10f, 0f), Random.Range(2f, 2f), 0);
         Randomization = new Vector3(
         ServeDirection.x + Random.Range(-0.5f, 0.5f),
         ServeDirection.y + Random.Range(-0.1f, 0.1f),
         ServeDirection.z + Random.Range(-0.0f, 0.0f));
         rb.AddForce(Randomization.normalized * ServeStrength);
+
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            rb.velocity *= 2.5f;
+        }
     }
 }

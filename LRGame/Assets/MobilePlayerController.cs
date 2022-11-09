@@ -4,12 +4,9 @@ using UnityEngine;
 
 public class MobilePlayerController : MonoBehaviour
 {
-    private Vector3 startPosition;
-    private Vector3 startCameraOffset;
-    private float touchSpaceY;
-    private float xRotation;
-    private float yRotation;
-    private float zRotation;
+    Vector3 startPosition;
+    Vector3 startCameraOffset;
+    float touchSpaceY;
     public float movementRange;
     public float receiveToX;
 
@@ -18,10 +15,9 @@ public class MobilePlayerController : MonoBehaviour
     Vector2 normalizedTouchToScreenVector;
     Vector2 adjustedVector;
     CameraFollow CameraFollow;
-    private Vector3 ballPosition;
-    private Vector3 AimToPosition;
-    private Vector3 resultVector;
-
+    Vector3 ballPosition;
+    Vector3 AimToPosition;
+    Vector3 resultVector;
 
     // Start is called before the first frame update
     void Start()
@@ -36,7 +32,8 @@ public class MobilePlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.touchCount > 0)
+        // movment by touch imput
+            if (Input.touchCount > 0)
         {
             Touch touch = Input.GetTouch(0);
             touchposition = touch.position;
@@ -57,7 +54,7 @@ public class MobilePlayerController : MonoBehaviour
             // move player
             transform.position = startPosition + new Vector3(adjustedVector.x, 0, adjustedVector.y) * movementRange;
             // move player
-            CameraFollow.offset = startCameraOffset + new Vector3(-2*adjustedVector.x, touchSpaceY - adjustedVector.y, -adjustedVector.y);
+            CameraFollow.offset = startCameraOffset + new Vector3(-2 * adjustedVector.x, touchSpaceY - adjustedVector.y, 0f);// -adjustedVector.y/2 + adjustedVector.x);
 
             // player arm rotation-------------------
             // current position of the ball in inertial system
@@ -72,7 +69,5 @@ public class MobilePlayerController : MonoBehaviour
             transform.Rotate(90, 0, 0);
             transform.Rotate(0, adjustedVector.x * 180, 0);
         }
-
-
     }
 }

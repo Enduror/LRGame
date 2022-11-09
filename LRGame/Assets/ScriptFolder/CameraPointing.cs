@@ -15,5 +15,6 @@ public class CameraPointing : MonoBehaviour
     void Update()
     {
         transform.LookAt(target);
+        transform.Rotate(10, 0, 0);
     }
 }
